@@ -1,6 +1,7 @@
 Roundcube Webmail RemoveAttachments
 ===================================
 This plugin adds an option to remove one or more attachments from a message.
+The original code is from Philip Weir.
 
 License
 =======
@@ -15,7 +16,7 @@ folder for details on the skin license.
 Install
 =======
 * Place this plugin folder into plugins directory of Roundcube
-* Add removeattachments to $rcmail_config['plugins'] in your Roundcube config
+* Add removeattachments to $config['plugins'] in your Roundcube config
 NB: When downloading the plugin from GitHub you will need to create a
 directory called removeattachments and place the files in there, ignoring the
 root directory in the downloaded archive
