@@ -5,7 +5,6 @@
     "homepage": "https://github.com/dsoares/Roundcube-Plugin-Remove-Attachments",
     "license": "GPL-3.0",
     "type": "roundcube-plugin",
-    "version": "0.3-git",
     "authors": [
         {
             "name": "Diana Soares",
