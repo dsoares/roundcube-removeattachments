@@ -4,6 +4,7 @@
     "keywords": ["mail","attachments"],
     "homepage": "https://github.com/dsoares/Roundcube-Plugin-RemoveAttachments",
     "license": "GPL-3.0",
+    "version": "0.2.4",
     "type": "roundcube-plugin",
     "authors": [
         {
