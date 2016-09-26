@@ -26,7 +26,6 @@ class removeattachments extends rcube_plugin
         $this->register_action('plugin.removeattachments.remove_attachments', array($this, 'remove_attachments'));
     }
 
-
     /**
      * Place a link in the attachmentmenu (template container) for each attachment
      * to trigger the removal of the selected attachment
@@ -46,7 +45,6 @@ class removeattachments extends rcube_plugin
 
         return $p;
     }
-
 
     /**
      * Place a link in the messageAttachments (template object)
@@ -126,9 +124,10 @@ class removeattachments extends rcube_plugin
         $body = $MESSAGE->first_text_part();
         $MAIL_MIME->setTXTBody($body, false, true);
 
+        $_part = rcube_utils::get_input_value('_part', rcube_utils::INPUT_GET);
+
         foreach ($MESSAGE->attachments as $attachment) {
-            if ($attachment->mime_id != rcube_utils::get_input_value('_part', rcube_utils::INPUT_GET) &&
-                rcube_utils::get_input_value('_part', rcube_utils::INPUT_GET) != '-1') {
+            if ($attachment->mime_id != $_part && $_part != '-1') {
                 $MAIL_MIME->addAttachment(
                                           $MESSAGE->get_part_content($attachment->mime_id),
                                           $attachment->mimetype,
@@ -155,7 +154,6 @@ class removeattachments extends rcube_plugin
                 $dispurl = 'cid:' . $attachment->content_id;
                 $MESSAGE_body = str_replace($dispurl, $attachment->filename, $MESSAGE_body);
                 $MAIL_MIME->setHTMLBody($MESSAGE_body);
-
                 $MAIL_MIME->addHTMLImage(
                                          $MESSAGE->get_part_content($attachment->mime_id),
                                          $attachment->mimetype,
