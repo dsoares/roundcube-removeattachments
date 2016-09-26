@@ -195,6 +195,9 @@ class removeattachments extends rcube_plugin
                 $imap->set_flag($uid, strtoupper($flag), $_SESSION['mbox']);
             }
 
+            // by default, mark message as seen.
+            $imap->set_flag($uid, 'SEEN', $_SESSION['mbox']);
+
             $this->api->output->command('display_message', $this->gettext('attachmentremoved'), 'confirmation');
             $this->api->output->command('removeattachments_reload', $uid);
         } else {
