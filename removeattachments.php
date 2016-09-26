@@ -6,7 +6,7 @@
  * Roundcube plugin to allow the removal of attachments from a message.
  * Original code from Philip Weir.
  *
- * @version 0.3
+ * @version 0.2.5
  * @author Diana Soares
  */
 class removeattachments extends rcube_plugin
