@@ -1,28 +1,53 @@
 Roundcube Webmail RemoveAttachments
 ===================================
 
-This plugin adds an option to remove one or more attachments from a message.
-
+This plugin adds an option to remove one or all attachments from a message.
 The original code is from Philip Weir.
 
-License
--------
+Stable versions of RemoveAttachments are available from the [Roundcube plugin repository][rcplugrepo] or the [releases section][releases] of the GitHub repository.
 
-This plugin is released under the GNU General Public License Version 3
-(http://www.gnu.org/licenses/gpl-3.0.html).
 
-Even if skins might contain some programming work, they are not considered
-as a linked part of the plugin and therefore skins DO NOT fall under the
-provisions of the GPL license. See the README file located in the core skins
-folder for details on the skin license.
+Requirements
+------------
 
-Install
--------
+None.
 
-* Place this plugin folder into plugins directory of Roundcube
-* Add removeattachments to $config['plugins'] in your Roundcube config
+Installation with composer
+----------------------------------------
 
-NB: When downloading the plugin from GitHub you will need to create a
+Add the plugin to your `composer.json` file:
+
+    "require": {
+        (...)
+        "dsoares/removeattachments": "~0.1"
+    }
+
+And run `$ composer update [--your-options]`.
+
+Manual Installation
+----------------------------------------
+
+1. Place this folder under your Rouncdube `plugins/` folder. The folder's name must be `removeattachments`.
+1. Enable the removeattachments plugin within the main Roundcube configuration file `config/config.inc.php`.
+
+*Note: When downloading the plugin from GitHub you will need to create a
 directory called removeattachments and place the files in there,
 ignoring the root directory in the downloaded archive directory in the
-downloaded archive. 
+downloaded archive.*
+
+License
+----------------------------------------
+
+This plugin is released under the [GNU General Public License Version 3+][gpl].
+
+Contact
+----------------------------------------
+
+Comments and suggestions are welcome!
+
+Email: [Diana Soares][dsoares]
+
+[rcplugrepo]: http://plugins.roundcube.net/packages/dsoares/removeattachments
+[releases]: http://github.com/JohnDoh/Roundcube-Plugin-RemoveAttachments/releases
+[gpl]: http://www.gnu.org/licenses/gpl.html
+[dsoares]: mailto:diana.soares@gmail.com
