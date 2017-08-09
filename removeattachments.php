@@ -34,8 +34,10 @@ class removeattachments extends rcube_plugin
     {
         if ($p['name'] == 'attachmentmenu') {
             $link = $this->api->output->button(array(
+                    'type' => 'link',
+                    'id'   => 'attachmentmenuremove',
                     'command'  => 'plugin.removeattachments.removeone',
-                    'classact' => 'removelink icon active',
+                    'class' => 'removelink icon active',
                     'content'  => html::tag('span', array('class'=>'icon cross'),
                         rcube::Q($this->gettext('removeattachments.removeattachment')))
             ));
