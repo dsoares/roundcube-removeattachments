@@ -181,8 +181,8 @@ class removeattachments extends rcube_plugin
             }
         }
 
-        $saved = $imap->save_message($_SESSION['mbox'], $MAIL_MIME->getMessage());
-        //write_log("debug","saved=".$saved);
+        $saved = $imap->save_message($_SESSION['mbox'], $MAIL_MIME->getMessage(),
+            '', false, array(), $MESSAGE->headers->date);
 
         if ($saved) {
             $imap->delete_message($MESSAGE->uid);
