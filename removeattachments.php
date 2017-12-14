@@ -1,7 +1,7 @@
 <?php
 
 /**
- * RemoveAttachments
+ * Remove_Attachments
  *
  * Roundcube plugin to allow the removal of attachments from a message.
  * Original code from Philip Weir.
@@ -9,7 +9,7 @@
  * @version 0.2.8
  * @author Diana Soares
  */
-class removeattachments extends rcube_plugin
+class remove_attachments extends rcube_plugin
 {
     public $task = 'mail';
 
@@ -19,11 +19,17 @@ class removeattachments extends rcube_plugin
     public function init()
     {
         $this->add_texts('localization', array('removeoneconfirm', 'removeallconfirm', 'removing'));
-        $this->include_script('removeattachments.js');
+        $this->include_script('remove_attachments.js');
 
+<<<<<<< HEAD
+        $this->add_hook('template_object_messageattachments', array($this, 'attachment_removelink'));
+        $this->add_hook('template_container',                 array($this, 'attachmentmenu_removelink'));
+        $this->register_action('plugin.remove_attachments.removeattachments', array($this, 'removeattachments'));
+=======
         $this->add_hook('template_container',                 array($this, 'add_removeone_link'));
         $this->add_hook('template_object_messageattachments', array($this, 'add_removeall_link'));
         $this->register_action('plugin.removeattachments.remove_attachments', array($this, 'remove_attachments'));
+>>>>>>> e2bbdf0cd2c52052e3077e18b15a062d6422f419
     }
 
     /**
@@ -34,12 +40,19 @@ class removeattachments extends rcube_plugin
     {
         if ($p['name'] == 'attachmentmenu') {
             $link = $this->api->output->button(array(
+<<<<<<< HEAD
+                    'command'  => 'plugin.remove_attachments.removeone',
+                    'classact' => 'removelink icon active',
+                    'content'  => html::tag('span', array('class'=>'icon cross'),
+                        rcube::Q($this->gettext('remove_attachments.removeattachment')))
+=======
                 'type' => 'link',
                 'id'   => 'attachmentmenuremove',
                 'command'  => 'plugin.removeattachments.removeone',
                 'class' => 'removelink icon active',
                 'content'  => html::tag('span', array('class'=>'icon cross'),
                     rcube::Q($this->gettext('removeattachments.removeattachment')))
+>>>>>>> e2bbdf0cd2c52052e3077e18b15a062d6422f419
             ));
 
             $p['content'] .= html::tag('li', array('role'=>'menuitem'), $link);
@@ -54,6 +67,35 @@ class removeattachments extends rcube_plugin
      */
     public function add_removeall_link($p)
     {
+<<<<<<< HEAD
+        /* // place links to remove attachment for each attachment
+        $links = preg_split('/(<li[^>]*>)/', $p['content'], null, PREG_SPLIT_DELIM_CAPTURE);
+
+        for ($i = 1; $i < count($links); $i+=2) {
+            if (preg_match('/ id="attach([0-9]+)"/', $links[$i], $matches)) {
+                $remove = $this->api->output->button(array('command' => 'plugin.remove_attachments.removeone',
+                                                           'prop' => $matches[1],
+                                                           'image' => $this->url(null) . $this->local_skin_path() . '/del.png',
+                                                           'title' => 'remove_attachments.removeattachment',
+                                                           'style' => 'vertical-align:middle'));
+                $links[$i+1] = str_replace('</li>', '&nbsp;' . $remove . '</li>', $links[$i+1]);
+            }
+        }
+
+        $p['content'] = join('', $links);
+        */
+
+        // when there are multiple attachments allow delete all
+        if (substr_count($p['content'], ' id="attach') > 1) {
+            $link = $this->api->output->button(array('type' => 'link',
+                                                     'command' => 'plugin.remove_attachments.removeall',
+                                                     'content' => rcube::Q($this->gettext('remove_attachments.removeall')),
+                                                     'title' => 'remove_attachments.removeall',
+                                                     'class' => 'button remove_attachments'));
+
+            switch (rcmail::get_instance()->config->get('skin')) {
+            case 'classic':
+=======
         // when there are multiple attachments allow delete all
         if (substr_count($p['content'], ' id="attach') > 1) {
             $link = $this->api->output->button(array(
@@ -65,6 +107,7 @@ class removeattachments extends rcube_plugin
             ));
 
             if (rcmail::get_instance()->config->get('skin') == 'classic') {
+>>>>>>> e2bbdf0cd2c52052e3077e18b15a062d6422f419
                 //$p['content'] = preg_replace('/(<ul[^>]*>)/', '$1' . $link, $p['content']);
                 $p['content'] = str_replace('</ul>', html::tag('li', null, $link) . '</ul>', $p['content']);
             }
@@ -73,7 +116,7 @@ class removeattachments extends rcube_plugin
                 break;
             }
 
-            $this->include_stylesheet($this->local_skin_path() . '/removeattachments.css');
+            $this->include_stylesheet($this->local_skin_path() . '/remove_attachments.css');
         }
 
         return $p;
@@ -82,7 +125,7 @@ class removeattachments extends rcube_plugin
     /**
      * Remove attachments from a message
      */
-    public function remove_attachments()
+    public function removeattachments()
     {
         $rcmail  = rcmail::get_instance();
         $imap    = $rcmail->storage;
