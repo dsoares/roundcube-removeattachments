@@ -70,7 +70,6 @@ class removeattachments extends rcube_plugin
             }
             else {
                 $p['content'] .= $link;
-                break;
             }
 
             $this->include_stylesheet($this->local_skin_path() . '/removeattachments.css');
