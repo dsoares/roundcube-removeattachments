@@ -1,4 +1,4 @@
-# Roundcube Webmail RemoveAttachments
+# Roundcube plugin remove-attachments
 
 Roundcube plugin to add an option to remove one or all attachments from a message.
 The original code is from Philip Weir.
@@ -40,6 +40,6 @@ Comments and suggestions are welcome!
 Email: [Diana Soares][dsoares]
 
 [rcplugrepo]: http://plugins.roundcube.net/packages/dsoares/removeattachments
-[releases]: http://github.com/JohnDoh/Roundcube-Plugin-RemoveAttachments/releases
+[releases]: http://github.com/dsoares/roundcube-removeattachments/releases
 [gpl]: http://www.gnu.org/licenses/gpl.html
 [dsoares]: mailto:diana.soares@gmail.com
