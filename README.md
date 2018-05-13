@@ -1,47 +1,39 @@
-Roundcube Webmail RemoveAttachments
-===================================
+# Roundcube Webmail RemoveAttachments
 
-This plugin adds an option to remove one or all attachments from a message.
+Roundcube plugin to add an option to remove one or all attachments from a message.
 The original code is from Philip Weir.
 
-Stable versions of RemoveAttachments are available from the [Roundcube plugin repository][rcplugrepo] or the [releases section][releases] of the GitHub repository.
+Stable versions of this plugin are available from the [Roundcube plugin repository][rcplugrepo] or the [releases section][releases] of the GitHub repository.
 
 
-Requirements
-------------
+## Requirements
 
 None.
 
-Installation with composer
-----------------------------------------
+## Installation
+
+#### Installation with composer
 
 Add the plugin to your `composer.json` file:
 
     "require": {
         (...)
-        "dsoares/removeattachments": "~0.1"
+        "dsoares/removeattachments": "*"
     }
 
 And run `$ composer update [--your-options]`.
 
-Manual Installation
-----------------------------------------
+#### Manual Installation
 
 1. Place this folder under your Rouncdube `plugins/` folder. The folder's name must be `removeattachments`.
 1. Enable the removeattachments plugin within the main Roundcube configuration file `config/config.inc.php`.
 
-*Note: When downloading the plugin from GitHub you will need to create a
-directory called removeattachments and place the files in there,
-ignoring the root directory in the downloaded archive directory in the
-downloaded archive.*
 
-License
-----------------------------------------
+## License
 
 This plugin is released under the [GNU General Public License Version 3+][gpl].
 
-Contact
-----------------------------------------
+## Contact
 
 Comments and suggestions are welcome!
 
