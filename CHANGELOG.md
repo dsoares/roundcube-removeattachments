@@ -1,7 +1,36 @@
-Roundcube Webmail RemoveAttachments
-===================================
+Roundcube Webmail Plugin RemoveAttachments
+==========================================
+
+**2020-11-25**
+- Hungarian translation by <a href="https://github.com/balping">balping</a> (#17)
+
+**2018-05-13**
+- Release version 0.2.11
+- Rename project.
+
+**2018-05-07**
+- Release version 0.2.10
+- Create it_IT.inc by <a href="https://github.com/gianlucagiacometti">@gianlucagiacometti</a> (#14)
+
+**2018-01-23**
+- Release version 0.2.9
+- Drop break statement (#12)
+
+**2017-10-21**
+- Refactor function name for clearness. (#9)
+
+**2017-09-16**
+- Release version 0.2.8
+- Preserve the message date/timestamp.
+- Release version 0.2.7.
+- Add french translation by Jerome Dubois. (#8)
+
+**2017-09-09**
+- Release version 0.2.6.
+- Change menu link button to a type="link" (#86a4d78).
 
 **2016-09-26**
+- Release version 0.2.5.
 - Mark the created message as seen.
 - CS fixes.
 
