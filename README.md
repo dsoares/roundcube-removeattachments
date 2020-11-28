@@ -10,23 +10,20 @@ Stable versions of this plugin are available from the [Roundcube plugin reposito
 
 None.
 
+
 ## Installation
 
-#### Installation with composer
+#### Install with composer
 
-Add the plugin to your `composer.json` file:
+1. Go to your Roundcube root directory.
 
-    "require": {
-        (...)
-        "dsoares/removeattachments": "*"
-    }
-
-And run `$ composer update [--your-options]`.
+2. Run `$ composer require dsoares/removeattachments`.
 
 #### Manual Installation
 
-1. Place this folder under your Rouncdube `plugins/` folder. The folder's name must be `removeattachments`.
-1. Enable the removeattachments plugin within the main Roundcube configuration file `config/config.inc.php`.
+1. Place this folder named `removeattachments` under your Rouncdube `plugins/` folder. The folder's name must be `removeattachments`.
+
+2. Enable the removeattachments plugin within the main Roundcube configuration file `config/config.inc.php`.
 
 
 ## License
@@ -39,7 +36,7 @@ Comments and suggestions are welcome!
 
 Email: [Diana Soares][dsoares]
 
-[rcplugrepo]: http://plugins.roundcube.net/packages/dsoares/removeattachments
-[releases]: http://github.com/dsoares/roundcube-removeattachments/releases
-[gpl]: http://www.gnu.org/licenses/gpl.html
+[rcplugrepo]: https://plugins.roundcube.net/packages/dsoares/removeattachments
+[releases]: https://github.com/dsoares/roundcube-removeattachments/releases
+[gpl]: https://www.gnu.org/licenses/gpl.html
 [dsoares]: mailto:diana.soares@gmail.com

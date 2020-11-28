@@ -1,7 +1,7 @@
 <?php
 
 /**
- * RemoveAttachments
+ * Roundcube plugin RemoveAttachments.
  *
  * Roundcube plugin to allow the removal of attachments from a message.
  * Original code from Philip Weir.
@@ -14,55 +14,64 @@ class removeattachments extends rcube_plugin
     public $task = 'mail';
 
     /**
-     * Plugin initialization
+     * Plugin initialization.
      */
     public function init()
     {
-        $this->add_texts('localization', array('removeoneconfirm', 'removeallconfirm', 'removing'));
+        $this->add_texts('localization', ['removeoneconfirm', 'removeallconfirm', 'removing']);
         $this->include_script('removeattachments.js');
 
-        $this->add_hook('template_container',                 array($this, 'add_removeone_link'));
-        $this->add_hook('template_object_messageattachments', array($this, 'add_removeall_link'));
-        $this->register_action('plugin.removeattachments.remove_attachments', array($this, 'remove_attachments'));
+        $this->add_hook('template_container', [$this, 'add_removeone_link']);
+        $this->add_hook('template_object_messageattachments', [$this, 'add_removeall_link']);
+        $this->register_action('plugin.removeattachments.remove_attachments', [$this, 'remove_attachments']);
     }
 
     /**
-     * Place a link in the attachmentmenu (template container) for each attachment
-     * to trigger the removal of the selected attachment
+     * Handler to place a link in the attachmentmenu (template container)
+     * for each attachment to trigger the removal of the selected attachment.
+     *
+     * @param  array $p Hook arguments
+     * @return array Hook arguments
      */
     public function add_removeone_link($p)
     {
         if ($p['name'] == 'attachmentmenu') {
-            $link = $this->api->output->button(array(
+            $link = $this->api->output->button([
                 'type' => 'link',
-                'id'   => 'attachmentmenuremove',
-                'command'  => 'plugin.removeattachments.removeone',
+                'id' => 'attachmentmenuremove',
+                'command' => 'plugin.removeattachments.removeone',
                 'class' => 'removelink icon active',
-                'content'  => html::tag('span', array('class'=>'icon cross'),
-                    rcube::Q($this->gettext('removeattachments.removeattachment')))
-            ));
+                'content' => html::tag(
+                    'span',
+                    ['class' => 'icon cross'],
+                    rcube::Q($this->gettext('removeattachments.removeattachment'))
+                ),
+            ]);
 
-            $p['content'] .= html::tag('li', array('role'=>'menuitem'), $link);
+            $p['content'] .= html::tag('li', ['role' => 'menuitem'], $link);
         }
 
         return $p;
     }
 
     /**
-     * Place a link in the messageAttachments (template object)
-     * to trigger the removal of all attachments
+     * Handler to place a link in the messageAttachments (template object)
+     * to trigger the removal of all attachments.
+     *
+     * @param  array $p Hook arguments
+     * @return array Hook arguments
      */
     public function add_removeall_link($p)
     {
         // when there are multiple attachments allow delete all
         if (substr_count($p['content'], ' id="attach') > 1) {
-            $link = $this->api->output->button(array(
+            $link = $this->api->output->button([
                 'type' => 'link',
                 'command' => 'plugin.removeattachments.removeall',
                 'content' => rcube::Q($this->gettext('removeattachments.removeall')),
                 'title' => 'removeattachments.removeall',
-                'class' => 'button removeattachments'
-            ));
+                'class' => 'button removeattachments',
+            ]);
 
             if (rcmail::get_instance()->config->get('skin') == 'classic') {
                 //$p['content'] = preg_replace('/(<ul[^>]*>)/', '$1' . $link, $p['content']);
@@ -79,12 +88,12 @@ class removeattachments extends rcube_plugin
     }
 
     /**
-     * Remove attachments from a message
+     * Remove attachments from a message.
      */
     public function remove_attachments()
     {
-        $rcmail  = rcmail::get_instance();
-        $imap    = $rcmail->storage;
+        $rcmail = rcmail::get_instance();
+        $imap = $rcmail->storage;
         $MESSAGE = new rcube_message(rcube_utils::get_input_value('_uid', rcube_utils::INPUT_GET));
         $headers = $this->_parse_headers($imap->get_raw_headers($MESSAGE->uid));
 
@@ -94,8 +103,10 @@ class removeattachments extends rcube_plugin
         }
 
         // Remove old MIME headers
-        unset($headers['MIME-Version']);
-        unset($headers['Content-Type']);
+        unset(
+            $headers['MIME-Version'],
+            $headers['Content-Type']
+        );
 
         $MAIL_MIME = new Mail_mime($rcmail->config->header_delimiter());
         $MAIL_MIME->headers($headers);
@@ -119,7 +130,8 @@ class removeattachments extends rcube_plugin
                     false,
                     $attachment->encoding,
                     $attachment->disposition,
-                    '', $attachment->charset
+                    '',
+                    $attachment->charset
                 );
             }
         }
@@ -164,8 +176,10 @@ class removeattachments extends rcube_plugin
             }
         }
 
-        $saved = $imap->save_message($_SESSION['mbox'], $MAIL_MIME->getMessage(),
-            '', false, array(), $MESSAGE->headers->date);
+        $saved = $imap->save_message(
+            $_SESSION['mbox'], $MAIL_MIME->getMessage(),
+            '', false, [], $MESSAGE->headers->date
+        );
 
         if ($saved) {
             $imap->delete_message($MESSAGE->uid);
@@ -194,19 +208,21 @@ class removeattachments extends rcube_plugin
     }
 
     /**
-     * Parse message headers
+     * Parse message headers.
+     *
+     * @param array $headers The message headers
      */
     private function _parse_headers($headers)
     {
-        $a_headers = array();
+        $a_headers = [];
         $headers = preg_replace('/\r?\n(\t| )+/', ' ', $headers);
         $lines = explode("\n", $headers);
-        $c = count($lines);
+        $nlines = count($lines);
 
-        for ($i=0; $i<$c; $i++) {
-            if ($p = strpos($lines[$i], ': ')) {
-                $field = substr($lines[$i], 0, $p);
-                $value = trim(substr($lines[$i], $p+1));
+        for ($i = 0; $i < $nlines; $i++) {
+            if ($pos = strpos($lines[$i], ': ')) {
+                $field = substr($lines[$i], 0, $pos);
+                $value = trim(substr($lines[$i], $pos + 1));
                 $a_headers[$field] = $value;
             }
         }

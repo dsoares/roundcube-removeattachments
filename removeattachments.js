@@ -1,5 +1,5 @@
 /**
- * RemoveAttachments plugin script
+ * RemoveAttachments plugin script.
  */
 window.rcmail  &&  rcmail.addEventListener('init', function(evt) {
     if (rcmail.env.task == 'mail') {
@@ -7,14 +7,22 @@ window.rcmail  &&  rcmail.addEventListener('init', function(evt) {
             var part = rcmail.env.selected_attachment;
             if (part > 0 && confirm(rcmail.gettext('removeoneconfirm','removeattachments'))) {
                 var lock = rcmail.set_busy(true, 'removeattachments.removing');
-                rcmail.http_request('plugin.removeattachments.remove_attachments', '_mbox=' + urlencode(rcmail.env.mailbox) + '&_uid=' + rcmail.env.uid + '&_part=' + part, lock);
+                rcmail.http_request(
+                    'plugin.removeattachments.remove_attachments',
+                    '_mbox=' + urlencode(rcmail.env.mailbox) + '&_uid=' + rcmail.env.uid + '&_part=' + part,
+                    lock
+                );
             }
         }, true);
 
         rcmail.register_command('plugin.removeattachments.removeall', function() {
             if (confirm(rcmail.gettext('removeallconfirm','removeattachments'))) {
                 var lock = rcmail.set_busy(true, 'removeattachments.removing');
-                rcmail.http_request('plugin.removeattachments.remove_attachments', '_mbox=' + urlencode(rcmail.env.mailbox) + '&_uid=' + rcmail.env.uid + '&_part=-1', lock);
+                rcmail.http_request(
+                    'plugin.removeattachments.remove_attachments',
+                    '_mbox=' + urlencode(rcmail.env.mailbox) + '&_uid=' + rcmail.env.uid + '&_part=-1',
+                    lock
+                );
             }
         }, true);
 
