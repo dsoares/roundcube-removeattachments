@@ -5,7 +5,7 @@ window.rcmail  &&  rcmail.addEventListener('init', function(evt) {
     if (rcmail.env.task == 'mail') {
         rcmail.register_command('plugin.removeattachments.removeone', function() {
             var part = rcmail.env.selected_attachment;
-            if (part > 0 && confirm(rcmail.gettext('removeoneconfirm','removeattachments'))) {
+            if (part && confirm(rcmail.gettext('removeoneconfirm','removeattachments'))) {
                 var lock = rcmail.set_busy(true, 'removeattachments.removing');
                 rcmail.http_request(
                     'plugin.removeattachments.remove_attachments',
