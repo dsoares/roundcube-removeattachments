@@ -4,7 +4,7 @@
     "description": "This plugin adds an option to remove one or more attachments from a message",
     "keywords": ["mail","roundcube","attachments"],
     "homepage": "https://github.com/dsoares/roundcube-removeattachments",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "license": "GPL-3.0+",
     "authors": [
         {
