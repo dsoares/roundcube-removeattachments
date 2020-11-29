@@ -111,7 +111,17 @@ class removeattachments extends rcube_plugin
     {
         $rcmail = rcmail::get_instance();
         $imap = $rcmail->storage;
-        $MESSAGE = new rcube_message(rcube_utils::get_input_value('_uid', rcube_utils::INPUT_GET));
+        $uid = rcube_utils::get_input_value('_uid', rcube_utils::INPUT_GET);
+
+        $MESSAGE = new rcube_message($uid);
+
+        if (empty($MESSAGE)) {
+            $this->api->output->command('display_message', $this->gettext('messageopenerror'), 'error');
+            $this->api->output->send();
+
+            return;
+        }
+
         $headers = $this->_parse_headers($imap->get_raw_headers($MESSAGE->uid));
 
         // set message charset as default
@@ -128,8 +138,9 @@ class removeattachments extends rcube_plugin
         $MAIL_MIME = new Mail_mime($rcmail->config->header_delimiter());
         $MAIL_MIME->headers($headers);
 
-        if ($MESSAGE->has_html_part()) {
-            $body = $MESSAGE->first_html_part();
+        $part = null;
+        if ($MESSAGE->has_html_part(true, $part)) {
+            $body = $MESSAGE->get_part_content($part->mime_id, null, true);
             $MAIL_MIME->setHTMLBody($body);
         }
 
