@@ -1,0 +1,3 @@
+a.removelink::before {
+    content: "\f2ed";
+}
