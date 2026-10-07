@@ -218,7 +218,7 @@ class removeattachments extends rcube_plugin
             $uid = $saved; //dsoares
 
             // set flags
-            foreach ($MESSAGE->headers->flags as $flag) {
+            foreach (array_keys($MESSAGE->headers->flags) as $flag) {
                 $imap->set_flag($uid, strtoupper($flag), $_SESSION['mbox']);
             }
 
